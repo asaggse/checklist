@@ -16,3 +16,30 @@ body {
     max-width: 400px;
     margin: 0 auto;
 }
+
+/* Screen view logic */
+.building-screen,
+.loading-screen,
+.result-screen {
+    display: none;
+}
+
+.building .building-screen,
+.loading .loading-screen,
+.result .result-screen {
+    display: block;
+}
+
+/* Header */
+header {
+    text-align: center;
+}
+
+.boolean-logo {
+    height: 30px;
+}
+
+.app-logo {
+    max-width: 100px;
+    margin: 16px 0;
+}
