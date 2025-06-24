@@ -43,3 +43,23 @@ header {
     max-width: 100px;
     margin: 16px 0;
 }
+
+/* Cards */
+.card {
+    background-color: #539afe;
+    border: 1px solid #1475fd;
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+}
+
+.card-title {
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Unbouded', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
