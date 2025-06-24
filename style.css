@@ -63,3 +63,25 @@ header {
     font-size: 20px;
     margin-bottom: 16px;
 }
+
+/* Input */
+input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 30px;
+    color: #62a3ff;
+    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    background-color: #e9f2ff;
+    outline: none;
+    border: 3px solid transparent;
+}
+
+input::placeholder {
+    color: #62a3ff;
+}
+
+input:focus {
+    color: #072c81;
+    border-color: #d9ff66;
+}
