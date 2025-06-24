@@ -75,7 +75,7 @@ function renderList() {
     listContainer.innerHTML = '';
 
     // Cicliamo sugli elementi della lista
-    items.forEach(function (item){
+    items.forEach(function (item) {
         let statusImage = 'undone.webp';
         let statusClass = '';
 
@@ -104,4 +104,93 @@ function renderList() {
 
     // Abilitiamo le icone di cambio di stato
     enableStatusIcons();
+}
+
+// Funzione per abilitare le icone di cancellazione
+function enableDeleteIcons() {
+    // Raccogliamo le icone di cancellazione dalla pagina
+    const deleteIcons = document.querySelectorAll('.delete-icon');
+
+    // Per ciascuna delle icone di cancellazione...
+    deleteIcons.forEach(function (icon, index) {
+        // Al click sull'icona di cancellazione...
+        icon.addEventListener('click', function () {
+            // Elimino l'elemento dalla lista
+            items.splice(index, 1)
+
+            // Chiedo a JS di re-renderizzare la lista aggiornata
+            renderList()
+        })
+    })
+}
+
+// Funzione per abilitare le icone di cambio status
+function enableStatusIcons() {
+    // Raccogliamo le icone di cambio status
+    const statusIcons = document.querySelectorAll('.status-icon');
+
+    // Per ciascuna delle icone di cambio status
+    statusIcons.forEach(function (icon, index) {
+        // Al click sull'icona...
+        icon.addEventListener('click', function () {
+            //  Invertiamo lo stato 
+            items[index].status = !items[index].status
+
+            // Ri-renderizza la lista
+            renderList();
+
+            console.log(items);
+
+
+        })
+
+    })
+}
+
+// Funzione per richiedere a Gemini di suggerire un oggetto
+async function getSuggestionFromGemini() {
+    // Estrapoliamo solo i nomi dalla lista per darli a gemini
+    const names = [];
+
+    // Per ognuno degli elementi in lista...
+    items.forEach(function (item) {
+        // Aggiungo il nome in lista
+        names.push(item.name);
+    })
+
+    // Convertiamo l'array in stringa
+    const myList = names.join(', ');
+
+
+    // Prepariamo il prompt 
+    const prompt = `
+        Devo fare un viaggio. Al momento ho messo in valigia queste cose: ${myList}. Puoi suggerirmi un'altra cosa da aggiungere?
+        Non includere NESSUN testo esplicativo, markdown, o qualsiasi altra cosa al di fuori dell'oggetto JSON.
+        La risposta deve iniziare con il carattere '{' e finire con il carattere '}'.
+        Il formato JSON DEVE essere esattamente: {"status": false,  "name": "tuo suggerimento qui"}
+        Esempio di output corretto: {"status": false, "name": "Crema solare"}
+    `;
+
+    //  preparo l'oggetto di configurazione
+    const config = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { response_mime_type: 'application/json' }
+        })
+    }
+
+    // effettuo la chiamata
+    const response = await fetch(API_ENDPOINT, config);
+    const data = await response.json();
+
+
+    // Estrapolo il suggerimento di Gemini
+    const suggestedItem = JSON.parse(data.candidates[0].content.parts[0].text)
+
+    console.log(suggestedItem);
+
+    //: Lo inserisco nella lista
+    items.push(suggestedItem);
 }
