@@ -67,3 +67,41 @@ suggestButton.addEventListener('click', async function () {
     // Torniamo alla pagina principale
     main.className = 'building';
 })
+
+// # FUNZIONI
+// Funzione per mostrare la lista in pagina
+function renderList() {
+    // Svuotiamo il contenuto precedente
+    listContainer.innerHTML = '';
+
+    // Cicliamo sugli elementi della lista
+    items.forEach(function (item){
+        let statusImage = 'undone.webp';
+        let statusClass = '';
+
+        if (item.status === true) {
+            statusImage = 'done.webp';
+            statusClass = 'done';
+        }
+
+        // Creiamo un template HTML per l'elemento
+        const itemHTML = `
+        <li class="card">
+            <div class="item">
+                <img class="status-icon" src="img/${statusImage}" alt="status icon">
+                <p class="item-name ${statusClass}">${item.name}</p>
+            </div>
+            <img class="delete-icon" src="img/delete.svg" alt="delete icon">
+        </li>
+        `
+
+        // Aggiungi il template alla lista
+        listContainer.innerHTML += itemHTML;
+    });
+
+    // Abilitiamo le icone di cancellazione
+    enableDeleteIcons();
+
+    // Abilitiamo le icone di cambio di stato
+    enableStatusIcons();
+}
