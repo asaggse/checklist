@@ -85,3 +85,19 @@ input:focus {
     color: #072c81;
     border-color: #d9ff66;
 }
+
+/* Primary Button */
+button,
+.answer-box {
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    cursor: pointer;
+    font-size: 18px;
+}
