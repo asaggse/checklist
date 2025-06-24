@@ -101,3 +101,50 @@ button,
     cursor: pointer;
     font-size: 18px;
 }
+
+.primary-button {
+    color: #d9ff66;
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    background-color: #072c81;
+    text-transform: uppercase;
+    font-family: 'Unbouded', sans-serif;
+}
+
+.answer-button {
+    color: #ffffff;
+    background-color: #1475fd;
+    font-family: 'Inter', sans-serif;
+}
+
+.answer-box {
+    color: #072c81;
+    background-color: #e9f2ff;
+    font-weight: 400;
+}
+
+/* Loading Screen */
+.loading-screen {
+    text-align: center;
+}
+
+.loading-screen img {
+    margin-top: 100px;
+    animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        scale: 1;
+    }
+
+    to {
+        scale: 1.1;
+    }
+}
+
+.question {
+    color: #ffffff;
+    font-size: 18px;
+}
